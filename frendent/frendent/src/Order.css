@@ -1,0 +1,64 @@
+.order-page {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+/* FORM */
+.order-form {
+  flex: 1;
+  min-width: 300px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.order-form input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+}
+
+.order-form label {
+  display: block;
+  margin: 8px 0;
+}
+
+/* BUTTON */
+.order-btn {
+  width: 100%;
+  padding: 12px;
+  background: #ff6600;
+  color: white;
+  border: none;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* SUMMARY */
+.order-summary {
+  flex: 1;
+  min-width: 300px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.summary-card {
+  display: flex;
+  gap: 10px;
+}
+
+.summary-card img {
+  width: 80px;
+  height: 100px;
+  object-fit: cover;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .order-page {
+    flex-direction: column;
+  }
+}

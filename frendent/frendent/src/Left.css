@@ -1,0 +1,77 @@
+
+.cardu {
+  max-width: 900px;
+  margin: 20px auto;
+  background: rgba(245, 231, 233, 0.993);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 70px;
+ 
+ 
+}
+
+
+.cardu-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.cardu-img {
+  flex: 1;
+}
+
+.cardu-img img {
+  width: 100%;
+  height: 560px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+
+.cardu-content {
+  flex: 1;
+}
+
+.cardu-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.cardu-text {
+  font-size: 14px;
+  color: black;
+}
+
+
+
+@media (max-width: 768px) {
+  .cardu-row {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cardu-img img {
+    height: 250px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .cardu {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .cardu-img img {
+    height: 200px;
+  }
+
+  .cardu-title {
+    font-size: 18px;
+  }
+
+  .cardu-text {
+    font-size: 13px;
+  }
+}
