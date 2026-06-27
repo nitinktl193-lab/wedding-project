@@ -23,7 +23,7 @@ function HomeProducts() {
   const addToCart = (e, item) => {
     e.stopPropagation();
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const exist = cart.find((p) => p._id === item._id);
 
     if (!exist) {
@@ -48,7 +48,7 @@ function HomeProducts() {
         key={item._id}
         onClick={() => navigate(`/product/${item._id}`)}
       >
-        <img src={getImageUrl(item)} alt={item.name} />
+        <img src={getImageUrl(item)} alt={item.title || item.name} />
 
         <div className="overlay">
           <h3>{item.title || item.name}</h3>
@@ -60,13 +60,13 @@ function HomeProducts() {
 
   return (
     <div className="home-products">
-      <h2 className="section-title"></h2>
+      <h2 className="section-title">Men Collection</h2>
       <div className="row">{renderCards(men)}</div>
 
-      <h2 className="section-title"></h2>
+      <h2 className="section-title">Women Collection</h2>
       <div className="row">{renderCards(women)}</div>
 
-      <h2 className="section-title"></h2>
+      <h2 className="section-title">Kids Collection</h2>
       <div className="row">{renderCards(kids)}</div>
     </div>
   );
