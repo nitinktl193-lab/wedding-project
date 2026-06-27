@@ -10,7 +10,7 @@ function ProductPage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/product/${id}`)
+      .get(`https://wedding-project-4-5rqj.onrender.com';/${id}`)
       .then((res) => setProduct(res.data))
       .catch((err) => console.log(err));
   }, [id]);

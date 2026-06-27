@@ -7,34 +7,45 @@ import "aos/dist/aos.css";
 import ProductGrid from "./ProductGrid";
 import "./Product.css";
 
+// Live Backend URL
+const API_URL = "https://wedding-project-4-5rqj.onrender.com";
+
 function Product() {
   const [products, setProducts] = useState([]);
   const { category } = useParams();
 
   useEffect(() => {
-    AOS.init({ duration: 800, once: true });
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
   }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
-      let url = "http://localhost:5000/products";
+      try {
+        let url = `${API_URL}/products`;
 
-      if (category) {
-        url = `http://localhost:5000/products?category=${category}`;
+        if (category) {
+          url = `${API_URL}/products?category=${category}`;
+        }
+
+        const res = await axios.get(url);
+
+        const formatted = res.data.map((item) => ({
+          id: item._id,
+          name: item.name,
+          price: item.price,
+
+          // Image URL
+          image: `${API_URL}/uploads/${item.image}`,
+        }));
+
+        setProducts(formatted);
+        AOS.refresh();
+      } catch (err) {
+        console.error("Error fetching products:", err);
       }
-
-      const res = await axios.get(url);
-
-
-      const formatted = res.data.map((item) => ({
-        id: item._id,
-        name: item.name,
-        price: item.price,
-        image: item.image
-      }));
-
-      setProducts(formatted);
-      AOS.refresh();
     };
 
     fetchProducts();
@@ -42,7 +53,10 @@ function Product() {
 
   return (
     <div className="product-page">
-      <ProductGrid products={products} showNavigate={true} />
+      <ProductGrid
+        products={products}
+        showNavigate={true}
+      />
     </div>
   );
 }

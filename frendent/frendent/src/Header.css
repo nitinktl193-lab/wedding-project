@@ -18,12 +18,12 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;  
-background: linear-gradient(135deg, #6051e7, #2b1a8f, #0c0125);
+background: linear-gradient(135deg, rgb(236, 230, 230), #7e73b4, #4b289c);
 
 }
 
 .login-box{
-    background: linear-gradient(135deg, #4337ac, #2b1a8f, #0c0125);
+    background: linear-gradient(135deg, white, #7e71ca, #491dad);
  box-shadow: 0 4px 10px rgba(5,3,3,6.1);
 padding:40px;
 border-radius:10px;

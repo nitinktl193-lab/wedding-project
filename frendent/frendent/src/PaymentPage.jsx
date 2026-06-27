@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function PaymentPage() {
+const API_URL = "https://wedding-project-4-5rqj.onrender.com";
 
+function PaymentPage() {
   const [item, setItem] = useState(null);
   const navigate = useNavigate();
 
@@ -15,31 +16,40 @@ function PaymentPage() {
     return <h2 style={{ padding: "20px" }}>No product selected ❗</h2>;
   }
 
+  const getImageUrl = () => {
+    const imageName = item.profile || item.image;
+
+    if (!imageName) return "";
+
+    if (imageName.startsWith("http")) {
+      return imageName;
+    }
+
+    return `${API_URL}/uploads/${imageName}`;
+  };
+
   const handlePayment = async () => {
     try {
-      // 1. Backend se order create karo
-      const res = await fetch("http://localhost:5000/create-order", {
+      const res = await fetch(`${API_URL}/create-order`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ amount: item.price })
+        body: JSON.stringify({ amount: item.price }),
       });
 
       const order = await res.json();
 
-      // 2. Razorpay options
       const options = {
-        key: "rzp_live_S8RMHt15gvcs1p", // 🔑 yaha apni Razorpay key dalna
+        key: "rzp_live_S8RMHt15gvcs1p",
         amount: order.amount,
         currency: "INR",
         name: "My Shop",
         description: "Product Payment",
         order_id: order.id,
 
-        handler: function (response) {
+        handler: function () {
           alert("Payment Successful ✅");
-
           localStorage.removeItem("buyNow");
           navigate("/");
         },
@@ -47,18 +57,16 @@ function PaymentPage() {
         prefill: {
           name: "Nitin Kumar",
           email: "test@gmail.com",
-          contact: "9999999999"
+          contact: "9999999999",
         },
 
         theme: {
-          color: "#28a745"
-        }
+          color: "#28a745",
+        },
       };
 
-      // 3. Razorpay open
       const rzp = new window.Razorpay(options);
       rzp.open();
-
     } catch (err) {
       console.log(err);
       alert("Payment Failed ❌");
@@ -67,27 +75,29 @@ function PaymentPage() {
 
   return (
     <div style={{ padding: "30px" }}>
-
       <h2>Payment Page 💳</h2>
 
-      <div style={{
-        border: "1px solid #ccc",
-        padding: "20px",
-        width: "300px",
-        borderRadius: "10px"
-      }}>
-
-        <img
-          src={`http://localhost:5000/uploads/${item.profile}`}
-          alt="product"
-          width="100%"
-        />
+      <div
+        style={{
+          border: "1px solid #ccc",
+          padding: "20px",
+          width: "300px",
+          borderRadius: "10px",
+        }}
+      >
+        <img src={getImageUrl()} alt="product" width="100%" />
 
         <h3>{item.name}</h3>
 
-        <p><b>Price:</b> ₹{item.price}</p>
-        <p><b>Size:</b> {item.selectedSize}</p>
-        <p><b>Color:</b> {item.selectedColor}</p>
+        <p>
+          <b>Price:</b> ₹{item.price}
+        </p>
+        <p>
+          <b>Size:</b> {item.selectedSize}
+        </p>
+        <p>
+          <b>Color:</b> {item.selectedColor}
+        </p>
 
         <br />
 
@@ -100,14 +110,12 @@ function PaymentPage() {
             color: "white",
             border: "none",
             borderRadius: "5px",
-            cursor: "pointer"
+            cursor: "pointer",
           }}
         >
           Pay Now
         </button>
-
       </div>
-
     </div>
   );
 }

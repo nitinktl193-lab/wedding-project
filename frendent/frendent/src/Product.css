@@ -38,7 +38,7 @@ body{
   opacity: 1;
 }
 
-/* ================= CENTER OVERLAY ================= */
+
 .card-overlay {
   position: absolute;
   top: 50%;
@@ -61,7 +61,7 @@ body{
 
 .card:hover .card-overlay {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+ 
 }
 
 
@@ -76,8 +76,9 @@ body{
 }
 
 .card-overlay button {
-  width: 60%;
-  padding: 8px;
+  width: 80%;
+  height: 40px;
+  padding: 1px;
   border: none;
   background: #fff;
   color: #000;
@@ -102,7 +103,7 @@ body{
   }
 
   .card-overlay button {
-    background: white;
+    background: black;
     color: white;
   }
 

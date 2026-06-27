@@ -7,7 +7,7 @@ function ProductList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://localhost:5000/products")
+    axios.get("https://wedding-project-4-5rqj.onrender.com")
       .then(res => {
         console.log("DATA 👉", res.data); // DEBUG
         setProducts(res.data);
